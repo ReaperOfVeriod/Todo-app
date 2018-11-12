@@ -1,5 +1,6 @@
 'use strict';
 
+const ipc = require('electron').ipcRenderer;
 const http = require('http');
 
 function reqData() {
@@ -43,4 +44,8 @@ function reqData() {
     }).on('error', function (err) {
         console.log('Error:', err);
     });
+}
+
+function updateTask() {
+    ipc.send('open-child');
 }

@@ -1,13 +1,19 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let win
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({backgroundColor: '#343a40', width: 800, height: 600, show: false,})
+
+  //once windows is fully loaded show the window
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
 
   // and load the index.html of the app.
   mainWindow.loadFile('./view/index.html')
@@ -21,6 +27,28 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+  })
+}
+
+function createChildWindow () {
+  win = new BrowserWindow({
+      backgroundColor: '#343a40',
+      width: 800,
+      height: 600,
+      show: false
+  })
+
+  win.once('ready-to-show', () => {
+      win.show();
+  })
+
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+
+  win.loadFile('./view/index.html')
+
+  win.on('closed', function () {
+      win = null
   })
 }
 
@@ -48,3 +76,5 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on('open-child', createChildWindow)

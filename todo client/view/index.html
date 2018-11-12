@@ -10,7 +10,12 @@
 
         <title>Hello, world!</title>
     </head>
-    <body>
+    <body class="bg-dark" onload="reqData();"> <!--when page load load reqData function to load in all tables-->
+        <div>
+            <button id="edit" type="button" class="btn btn-secondary">edit</button>
+        </div>
+
+        <!-- table with data from REST API -->
         <div class="bg-dark">
             <table class="table table-dark">
                 <thead>
@@ -24,16 +29,10 @@
                 </tbody>
             </table>
 
-            <button id="exitButton">Exit</button>
-            <button id="reqData">data</button>
 
             <script type="text/javascript">
-                document.getElementById("reqData").addEventListener("click", function (e) {
-                    reqData();
-                });
-            
-                document.getElementById("exitButton").addEventListener("click", function (e) {
-                    window.close()
+                document.getElementById('edit').addEventListener('click', function (e) {
+                    updateTask();
                 });
             </script>
 
