@@ -1,0 +1,14 @@
+{
+  "name": "todo-client",
+  "version": "0.0.0",
+  "description": "Desktop client ",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "ReaperOfVeriod",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^3.0.8"
+  }
+}
