@@ -22,7 +22,7 @@ function reqData() {
                     var data = JSON.parse(json);
                     //console.log(data);
                     for (var i = 0, len = data.length; i < len; i++) {
-                        console.log(data[i]);
+                        //console.log(data[i]);
                         let id = data[i]._id;
                         let name = data[i].name;
                         let createdDate = data[i].Created_date;

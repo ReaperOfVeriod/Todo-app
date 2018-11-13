@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, ipcMain} = require('electron');
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -43,9 +44,9 @@ function createChildWindow () {
   })
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
-  win.loadFile('./view/index.html')
+  win.loadFile('./view/edit.html')
 
   win.on('closed', function () {
       win = null
