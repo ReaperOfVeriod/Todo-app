@@ -5,6 +5,7 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let CreateWindow
 let win
 
 function createWindow () {
@@ -78,4 +79,33 @@ app.on('activate', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+function createCreateWindow () {
+  CreateWindow = new BrowserWindow({
+      backgroundColor: '#343a40',
+      width: 800,
+      height: 600,
+      show: false
+  })
+
+  CreateWindow.once('ready-to-show', () => {
+    CreateWindow.show();
+  })
+
+  // Open the DevTools.
+  //createWindow.webContents.openDevTools()
+
+  CreateWindow.loadFile('./view/create.html')
+
+  CreateWindow.on('closed', function () {
+    CreateWindow = null
+  })
+}
+
+function closeCreateWindow() {
+  CreateWindow.close()
+  mainWindow.loadFile('./view/index.html')
+}
+
+ipcMain.on('open-Create', createCreateWindow)
 ipcMain.on('open-child', createChildWindow)
+ipcMain.on('close-create', closeCreateWindow)

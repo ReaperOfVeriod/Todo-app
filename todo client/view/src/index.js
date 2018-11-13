@@ -49,3 +49,7 @@ function reqData() {
 function updateTask() {
     ipc.send('open-child');
 }
+
+function createTask() {
+    ipc.send('open-Create');
+}
