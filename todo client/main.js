@@ -10,7 +10,11 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({backgroundColor: '#343a40', width: 800, height: 600, show: false,})
+  mainWindow = new BrowserWindow({backgroundColor: '#343a40',
+            width: 900,
+            height: 600,  
+            show: false,
+  })
 
   //once windows is fully loaded show the window
   mainWindow.once('ready-to-show', () => {
