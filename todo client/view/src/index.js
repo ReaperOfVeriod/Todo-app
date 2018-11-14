@@ -29,7 +29,7 @@ function reqData() {
                         let status = data[i].status;
 
                         let tbody = document.getElementById("tbody");
-                        tbody.insertAdjacentHTML('afterbegin', '<td id="_id"></td>' + `\n` + `<td id="name"></td>` + `\n` + `<td id="createdDate"></td>` + `\n` + `<td id="status"></td>` + `\n` + `<td><button id="edit" class="btn btn-secondary"></button>` + `\n` + `<button id="delete" class="btn btn-danger"></button></td>`);
+                        tbody.insertAdjacentHTML('afterbegin', '<td id="_id"></td>' + `\n` + `<td id="name"></td>` + `\n` + `<td id="createdDate"></td>` + `\n` + `<td id="status"></td>` + `\n` + `<td><button id="edit" class="btn btn-secondary"></button>` + `\n` + `<button id="delete" value="" class="btn btn-danger"></button></td>`);
 
                         document.getElementById("_id").innerHTML = id;
                         document.getElementById("name").innerHTML = name;
@@ -37,6 +37,7 @@ function reqData() {
                         document.getElementById('status').innerHTML = status;
                         document.getElementById('edit').innerHTML = 'Edit';
                         document.getElementById('delete').innerHTML = 'Delete';
+                        document.getElementById('delete').value = id;
                     }
                 } catch (e) {
                     console.log('Error parsing JSON!');
@@ -50,10 +51,47 @@ function reqData() {
     });
 }
 
+function createTask() {
+    ipc.send('open-Create');
+}
+
 function updateTask() {
     ipc.send('open-child');
 }
 
-function createTask() {
-    ipc.send('open-Create');
+function deleteTodo() {
+
+    const deleteID =  document.getElementById('delete').value;
+
+    // console.log(deleteID);
+
+    const data = JSON.stringify({
+        todo: 'find a batter way for this shit'
+      })
+      
+      const options = {
+        hostname: 'localhost',
+        port: 3000,
+        path: `/tasks/${deleteID}`,
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': data.length
+        }
+      }
+      
+      const req = http.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`)
+      
+        res.on('data', (d) => {
+          process.stdout.write(d)
+        })
+      })
+      
+      req.on('error', (error) => {
+        console.error(error)
+      })
+      
+      req.write(data)
+      req.end()
 }

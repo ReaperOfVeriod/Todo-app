@@ -48,8 +48,13 @@
                     createTask();
                 });
 
-                document.getElementById('editTodo').addEventListener('click', function (e) {
-                    updateTask();
+                // document.getElementById('edit').addEventListener('click', function (e) {
+                //     updateTask();
+                // });
+
+                document.getElementById('delete').addEventListener('click', function (a) {
+                    console.log(document.getElementById('delete').value)
+                    deleteTodo();
                 });
             </script>
 

@@ -86,7 +86,7 @@ app.on('activate', function () {
 function createCreateWindow () {
   CreateWindow = new BrowserWindow({
       backgroundColor: '#343a40',
-      width: 800,
+      width: 900,
       height: 600,
       show: false
   })
