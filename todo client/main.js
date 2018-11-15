@@ -110,6 +110,11 @@ function closeCreateWindow() {
   mainWindow.loadFile('./view/index.html')
 }
 
+function refreshIndex() {
+  mainWindow.loadFile('./view/index.html')
+}
+
 ipcMain.on('open-Create', createCreateWindow)
 ipcMain.on('open-child', createChildWindow)
 ipcMain.on('close-create', closeCreateWindow)
+ipcMain.on('refresh-index', refreshIndex)
