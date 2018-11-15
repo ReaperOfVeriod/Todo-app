@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        
+                        <button id="test" type="button" class="btn btn-success pull-right" style="float:right">test</button>
                     </div>
                     <div class="col-sm">
 
@@ -47,15 +47,12 @@
                 document.getElementById('createTodo').addEventListener('click', function (e) {
                     createTask();
                 });
-
-                // document.getElementById('edit').addEventListener('click', function (e) {
-                //     updateTask();
-                // });
-
-                document.getElementById('delete').addEventListener('click', function (a) {
-                    console.log(document.getElementById('delete').value)
+                
+                function deleteRow(btn) {
+                    var row = btn.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
                     deleteTodo();
-                });
+                }
             </script>
 
             <script src="./src/index.js"></script>

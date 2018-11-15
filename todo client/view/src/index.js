@@ -27,9 +27,10 @@ function reqData() {
                         let name = data[i].name;
                         let createdDate = data[i].Created_date;
                         let status = data[i].status;
+                        let uniqueName = `delete` + [i];
 
                         let tbody = document.getElementById("tbody");
-                        tbody.insertAdjacentHTML('afterbegin', '<td id="_id"></td>' + `\n` + `<td id="name"></td>` + `\n` + `<td id="createdDate"></td>` + `\n` + `<td id="status"></td>` + `\n` + `<td><button id="edit" class="btn btn-secondary"></button>` + `\n` + `<button id="delete" value="" class="btn btn-danger"></button></td>`);
+                        tbody.insertAdjacentHTML('afterbegin', '<td id="_id"></td>' + `\n` + `<td id="name"></td>` + `\n` + `<td id="createdDate"></td>` + `\n` + `<td id="status"></td>` + `\n` + `<td><button id="edit" class="btn btn-secondary"></button>` + `\n` + `<button id="delete" value="" name="" onclick="deleteRow(this)" class="btn btn-danger delButton"></button></td>`);
 
                         document.getElementById("_id").innerHTML = id;
                         document.getElementById("name").innerHTML = name;
@@ -38,6 +39,7 @@ function reqData() {
                         document.getElementById('edit').innerHTML = 'Edit';
                         document.getElementById('delete').innerHTML = 'Delete';
                         document.getElementById('delete').value = id;
+                        document.getElementById('delete').name = uniqueName;
                     }
                 } catch (e) {
                     console.log('Error parsing JSON!');
