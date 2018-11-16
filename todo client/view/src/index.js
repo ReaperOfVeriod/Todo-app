@@ -65,3 +65,38 @@ function refreshIndex() {
     ipc.send('refresh-index');
 }
 
+function deleteRow(btn) {
+    const deleteID = btn.value;
+    // console.log(deleteID);
+    const data = JSON.stringify({
+        todo: 'find a batter way for this shit'
+    })
+    
+    const options = {
+        hostname: 'localhost',
+        port: 3000,
+        path: `/tasks/${deleteID}`,
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': data.length
+        }
+    }
+    
+    const req = http.request(options, (res) => {
+        console.log(`statusCode: ${res.statusCode}`)
+    
+        res.on('data', (d) => {
+        process.stdout.write(d)
+        })
+    })
+    
+    req.on('error', (error) => {
+        console.error(error)
+    })
+    
+    req.write(data)
+    req.end()
+    refreshIndex()
+}
+
